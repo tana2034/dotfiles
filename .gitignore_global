@@ -1,0 +1,9 @@
+.idea
+.vscode
+.generators
+.rakeTasks
+.solargraph.yml
+.byebug_history
+/coverage
+Gemfile.local
+.prettierrc
