@@ -19,10 +19,4 @@ fi
 autoload -U compinit
 compinit
 
-# anyenv
-eval "$(anyenv init -)"
-
-for conf in "$HOME/.zsh/rc/"*.zsh; do
-  source "${conf}"
-done
-unset conf
+eval "$(~/.local/bin/mise activate zsh)"
