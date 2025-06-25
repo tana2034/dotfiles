@@ -1,4 +1,6 @@
 #!/bin/zsh
+set -e
+
 dotfiles_dir=~/dotfiles
 ln -sf $dotfiles_dir/.zshrc ~/.zshrc
 ln -sf $dotfiles_dir/.vimrc ~/.vimrc

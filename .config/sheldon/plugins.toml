@@ -2,6 +2,7 @@ shell = "zsh"
 
 [plugins]
 
+# zsh-defer: 遅延ロードを行うためのプラグイン
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
 
@@ -9,35 +10,43 @@ github = "romkatv/zsh-defer"
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 PATH = 'export PATH="$PATH:{{ dir }}"'
 
+# zsh-autosuggestions: コマンドの自動提案を行うプラグイン
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 apply = ["defer"]
 
+# autojump: ディレクトリへの移動を簡単にするプラグイン
 [plugins.autojump]
 github = "wting/autojump"
 dir = "bin"
 apply = ["PATH", "source", "defer"]
 
+# zsh-syntax-highlighting: コマンドの構文をハイライトするプラグイン
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
+# z.lua: ディレクトリへの移動履歴を学習するプラグイン
 [plugins."z.lua"]
 github = "skywind3000/z.lua"
 apply = ["defer"]
 
+# enhancd: ディレクトリ移動をより便利にするプラグイン
 [plugins.enhancd]
 github = "b4b4r07/enhancd"
 apply = ["defer"]
 
+# base16: ターミナルの色を設定するプラグイン
 [plugins.base16]
 github = "chriskempson/base16-shell"
 apply = ["defer"]
 
+# zsh-completions: zsh の補完機能を提供するプラグイン
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 apply = ["defer"]
 
+# powerlevel10k: ターミナルのテーマを設定するプラグイン
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
