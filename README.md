@@ -1,36 +1,23 @@
 # dotfiles
 
-This repository contains my personal dotfiles for setting up a development environment.
+My personal dotfiles for macOS.
 
-## Installation
+## Quick Setup
 
-1.  **Clone the repository:**
+To set up a new Mac, simply clone this repository and run the `init.sh` script.
 
-    ```zsh
-    git clone https://github.com/tana2034/dotfiles.git ~/dotfiles
-    ```
+```zsh
+# Clone the repository
+git clone https://github.com/tana2034/dotfiles.git ~/dotfiles
 
-2.  **Install tools with Homebrew:**
+# Run the setup script
+chmod +x ~/dotfiles/init.sh
+~/dotfiles/init.sh
+```
 
-    This will install essential command-line tools listed in the `Brewfile`.
+This script will automatically:
 
-    ```zsh
-    brew bundle --file ~/dotfiles/Brewfile
-    ```
-
-3.  **Run the setup script:**
-
-    This script creates symbolic links from this repository to your home directory.
-
-    ```zsh
-    chmod +x ~/dotfiles/init.sh
-    ~/dotfiles/init.sh
-    ```
-
-4.  **Install mise:**
-
-    `mise` is a tool for managing multiple versions of programming languages.
-
-    ```zsh
-    curl https://mise.run | sh
-    ```
+1.  Install [Homebrew](https://brew.sh/) if it's not already installed.
+2.  Install all necessary packages and applications from the `Brewfile`.
+3.  Create symbolic links for the configuration files.
+4.  Install [mise](https://mise.run/) for managing language runtimes.

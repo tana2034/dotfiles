@@ -1,7 +1,5 @@
 # Brewfile
 
-tap "homebrew/bundle"
-
 # Shell tools
 brew "zsh-completions"
 brew "fzf"
