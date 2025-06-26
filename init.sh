@@ -26,6 +26,7 @@ fi
 # Create symbolic links
 echo "Creating symbolic links..."
 ln -sfv "$dotfiles_dir/.zshrc" ~/.zshrc
+ln -sfv "$dotfiles_dir/.gitconfig" ~/.gitconfig
 ln -sfv "$dotfiles_dir/.gitignore_global" ~/.gitignore_global
 ln -sfv "$dotfiles_dir/.rgignore" ~/.rgignore
 

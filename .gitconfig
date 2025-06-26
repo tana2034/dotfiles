@@ -1,0 +1,8 @@
+[user]
+    name = tana2034
+    email = 2034tana@gmail.com
+[core]
+    editor = nvim
+    quotepath = false
+[init]
+    defaultBranch = main
