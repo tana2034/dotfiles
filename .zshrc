@@ -13,11 +13,11 @@ if [ -e ~/.zsh/completions ]; then
 fi
 
 # fzf
-if [ -e /usr/local/bin/rg ]; then
+if command -v rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-case --no-ignore --follow --glob "!*.git*" --glob "!*node_modules*"'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 
 autoload -U compinit
 compinit
