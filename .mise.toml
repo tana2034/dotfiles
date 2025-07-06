@@ -1,0 +1,32 @@
+# mise configuration file
+# グローバルランタイム管理設定
+
+[tools]
+# Node.js
+node = "lts"  # 最新のLTS版を使用
+
+# Python
+python = "3.11"  # 安定版Python 3.11を使用
+
+# Ruby (必要に応じて)
+# ruby = "3.2"
+
+[settings]
+# 自動的に .tool-versions や .mise.toml を適用
+auto_install = true
+
+# プラグインの自動更新を有効化
+plugin_autoupdate_last_check_duration = "1 week"
+
+# より詳細なログを出力
+verbose = false
+
+# 古いバージョンの自動削除（30日以上未使用）
+disable_tools = []
+
+[env]
+# プロジェクト固有の環境変数をここに設定可能
+# EXAMPLE_VAR = "value"
+
+# 開発環境での便利な設定
+NODE_ENV = "development"

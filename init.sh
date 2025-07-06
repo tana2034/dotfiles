@@ -1,15 +1,45 @@
 #!/bin/zsh
 set -e
 
-echo "Starting dotfiles setup..."
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Helper functions
+log_info() {
+    echo -e "${GREEN}[INFO]${NC} $1"
+}
+
+log_warn() {
+    echo -e "${YELLOW}[WARN]${NC} $1"
+}
+
+log_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Check if running on macOS
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    log_error "This script is designed for macOS only."
+    exit 1
+fi
+
+log_info "Starting dotfiles setup..."
 
 # Install Homebrew if not installed
 if ! command -v brew &> /dev/null; then
-    echo "Homebrew not found. Installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    log_info "Homebrew not found. Installing..."
+    if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        log_info "Homebrew installed successfully."
+    else
+        log_error "Failed to install Homebrew."
+        exit 1
+    fi
 else
-    echo "Homebrew is already installed."
+    log_info "Homebrew is already installed."
 fi
 
 # Define dotfiles directory
@@ -17,32 +47,66 @@ dotfiles_dir=~/dotfiles
 
 # Run brew bundle
 if [ -f "$dotfiles_dir/Brewfile" ]; then
-    echo "Installing packages from Brewfile..."
-    brew bundle --file "$dotfiles_dir/Brewfile"
+    log_info "Installing packages from Brewfile..."
+    if brew bundle --file "$dotfiles_dir/Brewfile"; then
+        log_info "Packages installed successfully."
+    else
+        log_error "Failed to install some packages."
+        exit 1
+    fi
 else
-    echo "Brewfile not found. Skipping package installation."
+    log_warn "Brewfile not found. Skipping package installation."
 fi
 
 # Create symbolic links
-echo "Creating symbolic links..."
-ln -sfv "$dotfiles_dir/.zshrc" ~/.zshrc
-ln -sfv "$dotfiles_dir/.gitconfig" ~/.gitconfig
-ln -sfv "$dotfiles_dir/.gitignore_global" ~/.gitignore_global
-ln -sfv "$dotfiles_dir/.rgignore" ~/.rgignore
+log_info "Creating symbolic links..."
+files_to_link=(
+    ".zshrc"
+    ".gitconfig"
+    ".gitignore_global"
+    ".rgignore"
+    ".mise.toml"
+)
+
+for file in "${files_to_link[@]}"; do
+    if [ -f "$dotfiles_dir/$file" ]; then
+        ln -sfv "$dotfiles_dir/$file" ~/"$file"
+        log_info "Linked $file"
+    else
+        log_warn "File $file not found in dotfiles directory."
+    fi
+done
 
 # Create config directories and link files
+log_info "Setting up config directories..."
 mkdir -p ~/.config/sheldon
-ln -sfv "$dotfiles_dir/.config/sheldon/plugins.toml" ~/.config/sheldon/plugins.toml
+if [ -f "$dotfiles_dir/.config/sheldon/plugins.toml" ]; then
+    ln -sfv "$dotfiles_dir/.config/sheldon/plugins.toml" ~/.config/sheldon/plugins.toml
+    log_info "Linked sheldon config"
+else
+    log_warn "sheldon config not found."
+fi
 
 mkdir -p ~/.config/nvim
-ln -sfv "$dotfiles_dir/.config/nvim" ~/.config/nvim
+if [ -d "$dotfiles_dir/.config/nvim" ]; then
+    ln -sfv "$dotfiles_dir/.config/nvim" ~/.config/nvim
+    log_info "Linked nvim config"
+else
+    log_warn "nvim config directory not found."
+fi
 
 # Install mise
 if ! command -v mise &> /dev/null; then
-    echo "mise not found. Installing..."
-    curl https://mise.run | sh
+    log_info "mise not found. Installing..."
+    if curl https://mise.run | sh; then
+        log_info "mise installed successfully."
+    else
+        log_error "Failed to install mise."
+        exit 1
+    fi
 else
-    echo "mise is already installed."
+    log_info "mise is already installed."
 fi
 
-echo "Dotfiles setup completed successfully!"
+log_info "Dotfiles setup completed successfully!"
+log_info "Please restart your terminal or run 'source ~/.zshrc' to apply changes."

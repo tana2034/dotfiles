@@ -16,25 +16,14 @@ github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 apply = ["defer"]
 
-# autojump: ディレクトリへの移動を簡単にするプラグイン
-[plugins.autojump]
-github = "wting/autojump"
-dir = "bin"
-apply = ["PATH", "source", "defer"]
-
 # zsh-syntax-highlighting: コマンドの構文をハイライトするプラグイン
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
-# z.lua: ディレクトリへの移動履歴を学習するプラグイン
+# z.lua: ディレクトリへの移動履歴を学習するプラグイン（推奨）
 [plugins."z.lua"]
 github = "skywind3000/z.lua"
-apply = ["defer"]
-
-# enhancd: ディレクトリ移動をより便利にするプラグイン
-[plugins.enhancd]
-github = "b4b4r07/enhancd"
 apply = ["defer"]
 
 # base16: ターミナルの色を設定するプラグイン
