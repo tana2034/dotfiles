@@ -11,7 +11,7 @@
 #
 # What it does:
 #   - Links .claude.json → ~/.claude.json (home directory root)
-#   - Links CLAUDE.md → ~/.claude/CLAUDE.md (Claude config directory)
+#   - Links .claude/ directory → ~/.claude/ (Claude config directory)
 #
 # This allows you to manage Claude Code settings in this dotfiles repository
 # while keeping them accessible to Claude Code in the expected locations.
@@ -47,7 +47,7 @@ show_help() {
     echo ""
     echo "What it does:"
     echo "  • Links .claude.json → ~/.claude.json"
-    echo "  • Links CLAUDE.md → ~/.claude/CLAUDE.md"
+    echo "  • Links .claude/ directory → ~/.claude/"
     echo ""
     echo "This allows you to manage Claude Code settings in this dotfiles"
     echo "repository while keeping them accessible to Claude Code."
@@ -74,22 +74,22 @@ else
     log_warn ".claude.json not found in $dotfiles_dir"
 fi
 
-# Create .claude directory in home if it doesn't exist for CLAUDE.md
+# Link .claude directory to home directory
 claude_dir=~/.claude
-if [ ! -d "$claude_dir" ]; then
-    log_info "Creating $claude_dir directory..."
-    mkdir -p "$claude_dir"
-fi
+if [ -d "$dotfiles_dir/.claude" ]; then
+    # Remove existing .claude directory or symlink if it exists
+    if [ -e "$claude_dir" ] || [ -L "$claude_dir" ]; then
+        log_info "Removing existing $claude_dir..."
+        rm -rf "$claude_dir"
+    fi
 
-# Link CLAUDE.md to .claude directory
-if [ -f "$dotfiles_dir/CLAUDE.md" ]; then
-    log_info "Creating symbolic link for CLAUDE.md..."
-    ln -sfv "$dotfiles_dir/CLAUDE.md" "$claude_dir/CLAUDE.md"
-    log_info "Linked CLAUDE.md → $claude_dir/CLAUDE.md"
+    log_info "Creating symbolic link for .claude directory..."
+    ln -sfv "$dotfiles_dir/.claude" "$claude_dir"
+    log_info "Linked .claude/ directory → $claude_dir/"
 else
-    log_warn "CLAUDE.md not found in $dotfiles_dir"
+    log_warn ".claude directory not found in $dotfiles_dir"
 fi
 
 log_info "Claude Code setup completed successfully!"
 log_info ".claude.json → ~/.claude.json"
-log_info "CLAUDE.md → ~/.claude/CLAUDE.md"
+log_info ".claude/ directory → ~/.claude/"

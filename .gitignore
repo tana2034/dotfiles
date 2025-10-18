@@ -3,3 +3,9 @@ CLI-TOOLS-GUIDE.md
 
 # Claude Code設定ファイル（個人情報を含むため）
 .claude.json
+
+# Claude Codeランタイムデータ（自動生成されるため）
+.claude/shell-snapshots/
+.claude/projects/
+.claude/todos/
+.claude/debug/
