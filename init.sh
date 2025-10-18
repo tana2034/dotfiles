@@ -42,8 +42,9 @@ else
     log_info "Homebrew is already installed."
 fi
 
-# Define dotfiles directory
-dotfiles_dir=~/dotfiles
+# Define dotfiles directory (get the directory where this script is located)
+dotfiles_dir="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+log_info "Using dotfiles directory: $dotfiles_dir"
 
 # Run brew bundle
 if [ -f "$dotfiles_dir/Brewfile" ]; then
