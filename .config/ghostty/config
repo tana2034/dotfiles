@@ -1,0 +1,36 @@
+# Ghostty Configuration
+# https://ghostty.org/docs
+
+# Font settings
+font-family = JetBrains Mono
+font-size = 13
+
+# Window settings
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
+# Theme settings
+theme = gruvbox
+
+# Cursor settings
+cursor-style = block
+cursor-style-blink = false
+
+# Shell integration
+shell-integration = true
+shell-integration-features = cursor,sudo,title
+
+# Keybinds
+# Use default keybinds for most operations
+
+# Performance
+# GPU acceleration is enabled by default
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = true
+
+# Mouse
+mouse-hide-while-typing = true
