@@ -22,4 +22,16 @@ brew "node"
 brew "python3"
 brew "direnv"
 brew "git"
+brew "glab"         # GitLab CLI
 brew "curl"
+brew "uv"           # Python package manager（Spec Kit用）
+
+# Learning tools
+cask "anki"         # 間隔反復学習（SRS）ツール
+brew "poppler"      # PDF処理ツール（pdftotext）
+
+# Terminal
+cask "ghostty"      # モダンなGPUアクセラレーション対応ターミナル
+
+# Fonts
+cask "font-jetbrains-mono"  # プログラミング用フォント

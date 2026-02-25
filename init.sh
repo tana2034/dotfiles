@@ -96,6 +96,14 @@ else
     log_warn "nvim config directory not found."
 fi
 
+mkdir -p ~/.config/ghostty
+if [ -f "$dotfiles_dir/.config/ghostty/config" ]; then
+    ln -sfv "$dotfiles_dir/.config/ghostty/config" ~/.config/ghostty/config
+    log_info "Linked ghostty config"
+else
+    log_warn "ghostty config not found."
+fi
+
 # Install mise
 if ! command -v mise &> /dev/null; then
     log_info "mise not found. Installing..."
