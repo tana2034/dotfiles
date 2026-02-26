@@ -4,8 +4,34 @@ CLI-TOOLS-GUIDE.md
 # Claude Code設定ファイル（個人情報を含むため）
 .claude.json
 
-# Claude Codeランタイムデータ（自動生成されるため）
+# Claude Codeランタイムデータ（自動生成・個人データのため除外）
+# キャッシュ・一時ファイル
+.claude/backups/
+.claude/cache/
+.claude/image-cache/
+.claude/telemetry/
+.claude/usage-data/
+.claude/session-env/
+
+# 個人設定・認証情報
+.claude/mcp-needs-auth-cache.json
+.claude/statusline.sh
+
+# 履歴・統計データ
+.claude/history.jsonl
+.claude/stats-cache.json
+
+# プロジェクト・プラン・デバッグデータ
 .claude/shell-snapshots/
 .claude/projects/
 .claude/todos/
 .claude/debug/
+.claude/file-history/
+.claude/ide/
+.claude/plans/
+.claude/plugins/
+.claude/statsig/
+
+# 注意: 以下はバージョン管理に含める
+# .claude/CLAUDE.md - プロジェクト固有の指示
+# .claude/settings.json - チーム共有のpermissions設定（必要に応じて）
