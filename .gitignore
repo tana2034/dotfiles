@@ -14,6 +14,7 @@ CLI-TOOLS-GUIDE.md
 .claude/session-env/
 
 # 個人設定・認証情報
+.claude/.credentials.json
 .claude/mcp-needs-auth-cache.json
 .claude/statusline.sh
 
