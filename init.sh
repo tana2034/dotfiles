@@ -67,6 +67,7 @@ files_to_link=(
     ".gitignore_global"
     ".rgignore"
     ".mise.toml"
+    ".p10k.zsh"
 )
 
 for file in "${files_to_link[@]}"; do

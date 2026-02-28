@@ -12,7 +12,7 @@ brew "eza"          # lsの代替（見やすい表示）
 brew "fd"           # findの代替（高速検索）
 brew "htop"         # top/psの代替（リソース監視）
 brew "jq"           # JSON処理
-brew "tree"         # ディレクトリ構造表示
+brew "delta"        # git diffのシンタックスハイライト
 brew "tmux"         # ターミナル多重化
 brew "wget"         # ファイルダウンロード
 
@@ -22,6 +22,7 @@ brew "node"
 brew "python3"
 brew "direnv"
 brew "git"
+brew "gh"           # GitHub CLI
 brew "glab"         # GitLab CLI
 brew "curl"
 brew "uv"           # Python package manager（Spec Kit用）
