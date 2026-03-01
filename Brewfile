@@ -18,14 +18,15 @@ brew "wget"         # ファイルダウンロード
 
 # Development tools
 brew "neovim"
-brew "node"
-brew "python3"
+brew "mise"         # ランタイムバージョン管理（node/pythonはmiseで管理）
 brew "direnv"
 brew "git"
 brew "gh"           # GitHub CLI
 brew "glab"         # GitLab CLI
 brew "curl"
 brew "uv"           # Python package manager（Spec Kit用）
+brew "zoxide"       # ディレクトリジャンプ（z.luaより高速）
+brew "lazygit"      # TUI Gitクライアント
 
 # Learning tools
 cask "anki"         # 間隔反復学習（SRS）ツール

@@ -21,16 +21,6 @@ apply = ["defer"]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
-# z.lua: ディレクトリへの移動履歴を学習するプラグイン（推奨）
-[plugins."z.lua"]
-github = "skywind3000/z.lua"
-apply = ["defer"]
-
-# base16: ターミナルの色を設定するプラグイン
-[plugins.base16]
-github = "chriskempson/base16-shell"
-apply = ["defer"]
-
 # zsh-completions: zsh の補完機能を提供するプラグイン
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"

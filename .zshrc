@@ -16,14 +16,21 @@ if [ -e ~/.zsh/completions ]; then
   fpath=(~/.zsh/completions $fpath)
 fi
 
+# 履歴設定
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt SHARE_HISTORY
+
 # fzf with improved settings
 if command -v rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-case --no-ignore --follow --glob "!.git/" --glob "!node_modules/" --glob "!.DS_Store" --glob "!*.log" --glob "!build/" --glob "!dist/"'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 fi
-# Cache brew prefix for faster startup / 起動高速化のためbrew prefixをキャッシュ
-HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
+# Apple Silicon Mac では /opt/homebrew 固定（brew --prefix 呼び出しを省略して高速化）
+HOMEBREW_PREFIX="/opt/homebrew"
 if [[ -f "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh" ]]; then
     source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 fi
@@ -38,8 +45,8 @@ if command -v eza &> /dev/null; then
     alias la='eza -la'
     alias tree='eza --tree'
 fi
-if command -v fd &> /dev/null; then
-    alias find='fd'
+if command -v lazygit &> /dev/null; then
+    alias lg='lazygit'
 fi
 
 # System update functions / システム更新関数
@@ -67,17 +74,27 @@ upgrade-all() {
     echo "✅ All packages updated!"
 }
 
+# 24時間に1回だけ補完キャッシュを再生成（それ以外は高速な -C オプションでスキップ）
 autoload -U compinit
-compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
 
-# mise - suppress output for instant prompt / instant prompt用に出力を抑制
-if [[ -x ~/.local/bin/mise ]]; then
-    eval "$(~/.local/bin/mise activate zsh 2>/dev/null)"
+# mise - Homebrew または ~/.local/bin どちらでインストールしても動作するよう command -v で検出
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh 2>/dev/null)"
 fi
 
 # sheldon - suppress output for instant prompt / instant prompt用に出力を抑制
 if command -v sheldon &> /dev/null; then
     eval "$(sheldon source 2>/dev/null)"
+fi
+
+# zoxide: 高速ディレクトリジャンプ（`z <dir>` で移動）
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

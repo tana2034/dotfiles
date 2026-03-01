@@ -4,7 +4,20 @@
 [core]
     editor = nvim
     quotepath = false
+    pager = delta
 [init]
     defaultBranch = main
 [credential]
 	helper = osxkeychain
+[push]
+    autoSetupRemote = true
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+[interactive]
+    diffFilter = delta --color-only
+[alias]
+    st = status
+    co = checkout
+    lg = log --oneline --graph --decorate

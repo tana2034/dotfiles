@@ -1,9 +1,40 @@
+# Editor
 .idea
 .vscode
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build output
+/coverage
+/dist
+/build
+
+# Runtime
+.direnv/
+
+# Ruby
 .generators
 .rakeTasks
 .solargraph.yml
 .byebug_history
-/coverage
 Gemfile.local
+
+# Misc
 .prettierrc

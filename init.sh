@@ -105,17 +105,30 @@ else
     log_warn "ghostty config not found."
 fi
 
-# Install mise
+# Install mise (Homebrew 経由で管理。未インストールの場合は curl でフォールバック)
 if ! command -v mise &> /dev/null; then
-    log_info "mise not found. Installing..."
-    if curl https://mise.run | sh; then
-        log_info "mise installed successfully."
+    if command -v brew &> /dev/null; then
+        log_info "Installing mise via Homebrew..."
+        brew install mise
     else
-        log_error "Failed to install mise."
-        exit 1
+        log_info "mise not found. Installing via curl..."
+        if curl https://mise.run | sh; then
+            log_info "mise installed successfully."
+        else
+            log_error "Failed to install mise."
+            exit 1
+        fi
     fi
 else
     log_info "mise is already installed."
+fi
+
+# mise でランタイムをインストール
+log_info "Installing mise tools (node, python, etc.)..."
+if mise install; then
+    log_info "mise tools installed successfully."
+else
+    log_warn "Some mise tools may have failed to install."
 fi
 
 log_info "Dotfiles setup completed successfully!"
